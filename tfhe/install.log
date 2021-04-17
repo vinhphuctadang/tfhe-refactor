@@ -1,0 +1,37 @@
+[ 11%] Built target tfhe-fft-spqlios-avx
+[ 63%] Built target tfhe-core
+[ 65%] Built target tfhe-spqlios-avx
+[ 73%] Built target tfhe-fft-nayuki-portable
+[ 75%] Built target tfhe-nayuki-portable
+[ 86%] Built target tfhe-fft-spqlios-fma
+[ 88%] Built target tfhe-spqlios-fma
+[ 98%] Built target tfhe-fft-nayuki-avx
+[100%] Built target tfhe-nayuki-avx
+Install the project...
+-- Install configuration: "optim"
+-- Up-to-date: /usr/local/include/tfhe/lagrangehalfc_arithmetic.h
+-- Up-to-date: /usr/local/include/tfhe/lwe-functions.h
+-- Up-to-date: /usr/local/include/tfhe/lwebootstrappingkey.h
+-- Up-to-date: /usr/local/include/tfhe/lwekey.h
+-- Up-to-date: /usr/local/include/tfhe/lwekeyswitch.h
+-- Up-to-date: /usr/local/include/tfhe/lweparams.h
+-- Up-to-date: /usr/local/include/tfhe/lwesamples.h
+-- Up-to-date: /usr/local/include/tfhe/numeric_functions.h
+-- Up-to-date: /usr/local/include/tfhe/polynomials.h
+-- Up-to-date: /usr/local/include/tfhe/polynomials_arithmetic.h
+-- Up-to-date: /usr/local/include/tfhe/tfhe.h
+-- Up-to-date: /usr/local/include/tfhe/tfhe_core.h
+-- Up-to-date: /usr/local/include/tfhe/tfhe_garbage_collector.h
+-- Up-to-date: /usr/local/include/tfhe/tfhe_gate_bootstrapping_functions.h
+-- Up-to-date: /usr/local/include/tfhe/tfhe_gate_bootstrapping_structures.h
+-- Up-to-date: /usr/local/include/tfhe/tfhe_generic_streams.h
+-- Up-to-date: /usr/local/include/tfhe/tfhe_generic_templates.h
+-- Up-to-date: /usr/local/include/tfhe/tfhe_io.h
+-- Up-to-date: /usr/local/include/tfhe/tgsw.h
+-- Up-to-date: /usr/local/include/tfhe/tgsw_functions.h
+-- Up-to-date: /usr/local/include/tfhe/tlwe.h
+-- Up-to-date: /usr/local/include/tfhe/tlwe_functions.h
+-- Up-to-date: /usr/local/lib/libtfhe-nayuki-portable.dylib
+-- Up-to-date: /usr/local/lib/libtfhe-nayuki-avx.dylib
+-- Up-to-date: /usr/local/lib/libtfhe-spqlios-avx.dylib
+-- Up-to-date: /usr/local/lib/libtfhe-spqlios-fma.dylib

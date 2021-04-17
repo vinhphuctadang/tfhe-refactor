@@ -1,0 +1,9 @@
+[ 11%] Built target tfhe-fft-spqlios-avx
+[ 63%] Built target tfhe-core
+[ 65%] Built target tfhe-spqlios-avx
+[ 73%] Built target tfhe-fft-nayuki-portable
+[ 75%] Built target tfhe-nayuki-portable
+[ 86%] Built target tfhe-fft-spqlios-fma
+[ 88%] Built target tfhe-spqlios-fma
+[ 98%] Built target tfhe-fft-nayuki-avx
+[100%] Built target tfhe-nayuki-avx
