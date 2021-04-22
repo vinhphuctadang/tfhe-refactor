@@ -1,7 +1,7 @@
 #include <complex>
 //#define complex _Complex
 #include <fftw3.h>
-#include "polynomials.h"
+#include "../../polynomials.h"
 #include "lagrangehalfc_impl.h"
 #include <cassert>
 #include <cmath>

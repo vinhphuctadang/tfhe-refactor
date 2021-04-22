@@ -25,14 +25,28 @@
 #ifndef FFT_NAYUKI_H
 #define FFT_NAYUKI_H
 
+// Private data structure
+struct FftTables {
+	size_t n;
+	size_t bit_reversed[1024];
+	double cos_table[512];
+	double sin_table[512];
+};
+
+// Private data structure
+struct FftTables_Reverse {
+	uint64_t n;
+	uint64_t bit_reversed[1024];
+	double trig_tables[2040];
+};
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void* fft_init(size_t n);
+FftTables fft_init(size_t n);
 
-void* fft_init_reverse(size_t n);
+FftTables_Reverse fft_init_reverse(size_t n);
 
 void fft_transform(const void *tables, double *real, double *imag);
 

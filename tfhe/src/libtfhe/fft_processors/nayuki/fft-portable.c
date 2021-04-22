@@ -29,15 +29,6 @@
 #include "fft.h"
 
 
-// Private data structure
-struct FftTables {
-	size_t n;
-	size_t *bit_reversed;
-	double *cos_table;
-	double *sin_table;
-};
-
-
 // Private function prototypes
 static int32_t floor_log2(size_t n);
 static size_t reverse_bits(size_t x, uint32_t n);
@@ -46,30 +37,31 @@ static size_t reverse_bits(size_t x, uint32_t n);
 /*---- Function implementations ----*/
 
 // Returns a pointer to an opaque structure of FFT tables. n must be a power of 2.
-void *fft_init(size_t n) {
+FftTables fft_init(size_t n) {
 	// Check size argument
-	if (n <= 0 || (n & (n - 1)) != 0)
-		return NULL;  // Error: Size is not a power of 2
-	if (n / 2 > SIZE_MAX / sizeof(double) || n > SIZE_MAX / sizeof(size_t))
-		return NULL;  // Error: Size is too large, which makes memory allocation impossible
+// Due to fixed size N = 1024
+//	if (n <= 0 || (n & (n - 1)) != 0)
+//		return NULL;  // Error: Size is not a power of 2
+//	if (n / 2 > SIZE_MAX / sizeof(double) || n > SIZE_MAX / sizeof(size_t))
+//		return NULL;  // Error: Size is too large, which makes memory allocation impossible
 	
 	// Allocate structure
-	struct FftTables *tables = malloc(sizeof(struct FftTables));
-	if (tables == NULL)
-		return NULL;
+	struct FftTables tables; // = malloc(sizeof(struct FftTables));
+//	if (tables == NULL)
+//		return NULL;
 	tables->n = n;
 	
 	// Allocate arrays
-	tables->bit_reversed = malloc(n * sizeof(size_t));
-	tables->cos_table = malloc(n / 2 * sizeof(double));
-	tables->sin_table = malloc(n / 2 * sizeof(double));
-	if (tables->bit_reversed == NULL || tables->cos_table == NULL || tables->sin_table == NULL) {
-		free(tables->bit_reversed);
-		free(tables->cos_table);
-		free(tables->sin_table);
-		free(tables);
-		return NULL;
-	}
+//	tables->bit_reversed = malloc(n * sizeof(size_t));
+//	tables->cos_table = malloc(n / 2 * sizeof(double));
+//	tables->sin_table = malloc(n / 2 * sizeof(double));
+//	if (tables->bit_reversed == NULL || tables->cos_table == NULL || tables->sin_table == NULL) {
+//		free(tables->bit_reversed);
+//		free(tables->cos_table);
+//		free(tables->sin_table);
+//		free(tables);
+//		return NULL;
+//	}
 	
 	// Precompute values and store to tables
 	size_t i;

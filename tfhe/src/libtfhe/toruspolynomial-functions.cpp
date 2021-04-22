@@ -7,14 +7,14 @@
 using namespace std;
 
 // TorusPolynomial = 0
-EXPORT void torusPolynomialClear(TorusPolynomial *result) {
+void torusPolynomialClear(TorusPolynomial *result) {
     const int32_t N = result->N;
 
     for (int32_t i = 0; i < N; ++i) result->coefsT[i] = 0;
 }
 
 // TorusPolynomial = random
-EXPORT void torusPolynomialUniform(TorusPolynomial *result) {
+void torusPolynomialUniform(TorusPolynomial *result) {
     const int32_t N = result->N;
     Torus32 *x = result->coefsT;
 
@@ -23,7 +23,7 @@ EXPORT void torusPolynomialUniform(TorusPolynomial *result) {
 }
 
 // TorusPolynomial = TorusPolynomial
-EXPORT void torusPolynomialCopy(
+void torusPolynomialCopy(
         TorusPolynomial *result,
         const TorusPolynomial *sample) {
     assert(result != sample);
@@ -35,7 +35,7 @@ EXPORT void torusPolynomialCopy(
 }
 
 // TorusPolynomial + TorusPolynomial
-EXPORT void torusPolynomialAdd(TorusPolynomial *result, const TorusPolynomial *poly1, const TorusPolynomial *poly2) {
+void torusPolynomialAdd(TorusPolynomial *result, const TorusPolynomial *poly1, const TorusPolynomial *poly2) {
     const int32_t N = poly1->N;
     assert(result != poly1); //if it fails here, please use addTo
     assert(result != poly2); //if it fails here, please use addTo
@@ -48,7 +48,7 @@ EXPORT void torusPolynomialAdd(TorusPolynomial *result, const TorusPolynomial *p
 }
 
 // TorusPolynomial += TorusPolynomial
-EXPORT void torusPolynomialAddTo(TorusPolynomial *result, const TorusPolynomial *poly2) {
+void torusPolynomialAddTo(TorusPolynomial *result, const TorusPolynomial *poly2) {
     const int32_t N = poly2->N;
     Torus32 *r = result->coefsT;
     const Torus32 *b = poly2->coefsT;
@@ -59,7 +59,7 @@ EXPORT void torusPolynomialAddTo(TorusPolynomial *result, const TorusPolynomial 
 
 
 // TorusPolynomial - TorusPolynomial
-EXPORT void torusPolynomialSub(TorusPolynomial *result, const TorusPolynomial *poly1, const TorusPolynomial *poly2) {
+void torusPolynomialSub(TorusPolynomial *result, const TorusPolynomial *poly1, const TorusPolynomial *poly2) {
     const int32_t N = poly1->N;
     assert(result != poly1); //if it fails here, please use subTo
     assert(result != poly2); //if it fails here, please use subTo
@@ -72,7 +72,7 @@ EXPORT void torusPolynomialSub(TorusPolynomial *result, const TorusPolynomial *p
 }
 
 // TorusPolynomial -= TorusPolynomial
-EXPORT void torusPolynomialSubTo(TorusPolynomial *result, const TorusPolynomial *poly2) {
+void torusPolynomialSubTo(TorusPolynomial *result, const TorusPolynomial *poly2) {
     const int32_t N = poly2->N;
     Torus32 *r = result->coefsT;
     const Torus32 *b = poly2->coefsT;
@@ -82,7 +82,7 @@ EXPORT void torusPolynomialSubTo(TorusPolynomial *result, const TorusPolynomial 
 }
 
 // TorusPolynomial + p*TorusPolynomial
-EXPORT void
+void
 torusPolynomialAddMulZ(TorusPolynomial *result, const TorusPolynomial *poly1, int32_t p, const TorusPolynomial *poly2) {
     const int32_t N = poly1->N;
     Torus32 *r = result->coefsT;
@@ -94,7 +94,7 @@ torusPolynomialAddMulZ(TorusPolynomial *result, const TorusPolynomial *poly1, in
 }
 
 // TorusPolynomial += p*TorusPolynomial
-EXPORT void torusPolynomialAddMulZTo(TorusPolynomial *result, const int32_t p, const TorusPolynomial *poly2) {
+void torusPolynomialAddMulZTo(TorusPolynomial *result, const int32_t p, const TorusPolynomial *poly2) {
     const int32_t N = poly2->N;
     Torus32 *r = result->coefsT;
     const Torus32 *b = poly2->coefsT;
@@ -103,7 +103,7 @@ EXPORT void torusPolynomialAddMulZTo(TorusPolynomial *result, const int32_t p, c
 }
 
 // TorusPolynomial - p*TorusPolynomial
-EXPORT void torusPolynomialSubMulZ(TorusPolynomial *result, const TorusPolynomial *poly1, const int32_t p,
+void torusPolynomialSubMulZ(TorusPolynomial *result, const TorusPolynomial *poly1, const int32_t p,
                                    const TorusPolynomial *poly2) {
     const int32_t N = poly1->N;
     Torus32 *r = result->coefsT;
@@ -114,7 +114,7 @@ EXPORT void torusPolynomialSubMulZ(TorusPolynomial *result, const TorusPolynomia
 }
 
 //result= (X^{a}-1)*source
-EXPORT void torusPolynomialMulByXaiMinusOne(TorusPolynomial *result, int32_t a, const TorusPolynomial *source) {
+void torusPolynomialMulByXaiMinusOne(TorusPolynomial *result, int32_t a, const TorusPolynomial *source) {
     const int32_t N = source->N;
     Torus32 *out = result->coefsT;
     Torus32 *in = source->coefsT;
@@ -137,7 +137,7 @@ EXPORT void torusPolynomialMulByXaiMinusOne(TorusPolynomial *result, int32_t a, 
 
 
 //result= X^{a}*source
-EXPORT void torusPolynomialMulByXai(TorusPolynomial *result, int32_t a, const TorusPolynomial *source) {
+void torusPolynomialMulByXai(TorusPolynomial *result, int32_t a, const TorusPolynomial *source) {
     const int32_t N = source->N;
     Torus32 *out = result->coefsT;
     Torus32 *in = source->coefsT;
@@ -161,7 +161,7 @@ EXPORT void torusPolynomialMulByXai(TorusPolynomial *result, int32_t a, const To
 
 
 // TorusPolynomial -= p*TorusPolynomial
-EXPORT void torusPolynomialSubMulZTo(TorusPolynomial *result, int32_t p, const TorusPolynomial *poly2) {
+void torusPolynomialSubMulZTo(TorusPolynomial *result, int32_t p, const TorusPolynomial *poly2) {
     const int32_t N = poly2->N;
     Torus32 *r = result->coefsT;
     const Torus32 *b = poly2->coefsT;
@@ -171,7 +171,7 @@ EXPORT void torusPolynomialSubMulZTo(TorusPolynomial *result, int32_t p, const T
 
 
 // Norme Euclidienne d'un IntPolynomial
-EXPORT double intPolynomialNormSq2(const IntPolynomial *poly) {
+double intPolynomialNormSq2(const IntPolynomial *poly) {
     const int32_t N = poly->N;
     int32_t temp1 = 0;
 
@@ -183,28 +183,28 @@ EXPORT double intPolynomialNormSq2(const IntPolynomial *poly) {
 }
 
 // Sets to zero
-EXPORT void intPolynomialClear(IntPolynomial *poly) {
+void intPolynomialClear(IntPolynomial *poly) {
     const int32_t N = poly->N;
     for (int32_t i = 0; i < N; ++i)
         poly->coefs[i] = 0;
 }
 
 // Sets to zero
-EXPORT void intPolynomialCopy(IntPolynomial *result, const IntPolynomial *source) {
+void intPolynomialCopy(IntPolynomial *result, const IntPolynomial *source) {
     const int32_t N = source->N;
     for (int32_t i = 0; i < N; ++i)
         result->coefs[i] = source->coefs[i];
 }
 
 /** accum += source */
-EXPORT void intPolynomialAddTo(IntPolynomial *accum, const IntPolynomial *source) {
+void intPolynomialAddTo(IntPolynomial *accum, const IntPolynomial *source) {
     const int32_t N = source->N;
     for (int32_t i = 0; i < N; ++i)
         accum->coefs[i] += source->coefs[i];
 }
 
 /**  result = (X^ai-1) * source */
-EXPORT void intPolynomialMulByXaiMinusOne(IntPolynomial *result, int32_t ai, const IntPolynomial *source) {
+void intPolynomialMulByXaiMinusOne(IntPolynomial *result, int32_t ai, const IntPolynomial *source) {
     const int32_t N = source->N;
     int32_t *out = result->coefs;
     int32_t *in = source->coefs;
@@ -228,7 +228,7 @@ EXPORT void intPolynomialMulByXaiMinusOne(IntPolynomial *result, int32_t ai, con
 
 
 // Norme infini de la distance entre deux TorusPolynomial
-EXPORT double torusPolynomialNormInftyDist(const TorusPolynomial *poly1, const TorusPolynomial *poly2) {
+double torusPolynomialNormInftyDist(const TorusPolynomial *poly1, const TorusPolynomial *poly2) {
     const int32_t N = poly1->N;
     double norm = 0;
 
@@ -246,7 +246,7 @@ EXPORT double torusPolynomialNormInftyDist(const TorusPolynomial *poly1, const T
 
 
 // Norme 2 d'un IntPolynomial
-EXPORT double intPolynomialNorm2sq(const IntPolynomial *poly) {
+double intPolynomialNorm2sq(const IntPolynomial *poly) {
     const int32_t N = poly->N;
     double norm = 0;
 
@@ -258,7 +258,7 @@ EXPORT double intPolynomialNorm2sq(const IntPolynomial *poly) {
 }
 
 // Norme infini de la distance entre deux IntPolynomial
-EXPORT double intPolynomialNormInftyDist(const IntPolynomial *poly1, const IntPolynomial *poly2) {
+double intPolynomialNormInftyDist(const IntPolynomial *poly1, const IntPolynomial *poly2) {
     const int32_t N = poly1->N;
     double norm = 0;
 

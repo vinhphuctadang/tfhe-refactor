@@ -1,13 +1,13 @@
 #include <complex>
-#include <polynomials.h>
+#include "../../polynomials.h"
 #include "lagrangehalfc_impl.h"
 #include "fft.h"
 #include <cassert>
 #include <cmath>
 
 FFT_Processor_nayuki::FFT_Processor_nayuki(const int32_t N): _2N(2*N),N(N),Ns2(N/2) {
-    real_inout = (double*) malloc(sizeof(double) * _2N);
-    imag_inout = (double*) malloc(sizeof(double) * _2N);
+//    real_inout = (double*) malloc(sizeof(double) * _2N);
+//    imag_inout = (double*) malloc(sizeof(double) * _2N);
     tables_direct = fft_init(_2N);
     tables_reverse = fft_init_reverse(_2N);
     omegaxminus1 = (cplx*) malloc(sizeof(cplx) * _2N);
@@ -32,20 +32,20 @@ void FFT_Processor_nayuki::check_conjugate_cplx() {
 }
 
 void FFT_Processor_nayuki::execute_reverse_int(cplx* res, const int32_t* a) {
-    double* res_dbl=(double*) res;
-    for (int32_t i=0; i<N; i++) real_inout[i]=a[i]/2.;
-    for (int32_t i=0; i<N; i++) real_inout[N+i]=-real_inout[i];
-    for (int32_t i=0; i<_2N; i++) imag_inout[i]=0;
-    check_alternate_real();
-    fft_transform_reverse(tables_reverse,real_inout,imag_inout);
-    for (int32_t i=0; i<N; i+=2) { 
-	res_dbl[i]=real_inout[i+1];
-	res_dbl[i+1]=imag_inout[i+1];
-    }
-    for (int32_t i=0; i<Ns2; i++) {
-	assert(abs(cplx(real_inout[2*i+1],imag_inout[2*i+1])-res[i])<1e-20);
-    }
-    check_conjugate_cplx();
+//    double* res_dbl=(double*) res;
+//    for (int32_t i=0; i<N; i++) real_inout[i]=a[i]/2.;
+//    for (int32_t i=0; i<N; i++) real_inout[N+i]=-real_inout[i];
+//    for (int32_t i=0; i<_2N; i++) imag_inout[i]=0;
+//    check_alternate_real();
+//    fft_transform_reverse(tables_reverse,real_inout,imag_inout);
+//    for (int32_t i=0; i<N; i+=2) {
+//	res_dbl[i]=real_inout[i+1];
+//	res_dbl[i+1]=imag_inout[i+1];
+//    }
+//    for (int32_t i=0; i<Ns2; i++) {
+//	assert(abs(cplx(real_inout[2*i+1],imag_inout[2*i+1])-res[i])<1e-20);
+//    }
+//    check_conjugate_cplx();
 }
 
 void FFT_Processor_nayuki::execute_reverse_torus32(cplx* res, const Torus32* a) {
@@ -93,20 +93,20 @@ FFT_Processor_nayuki::~FFT_Processor_nayuki() {
     free(omegaxminus1);    
 }
 
-thread_local FFT_Processor_nayuki fp1024_nayuki(1024);
+FFT_Processor_nayuki fp1024_nayuki(1024);
 
 /**
  * FFT functions 
  */
-EXPORT void IntPolynomial_ifft(LagrangeHalfCPolynomial* result, const IntPolynomial* p) {
+void IntPolynomial_ifft(LagrangeHalfCPolynomial* result, const IntPolynomial* p) {
     LagrangeHalfCPolynomial_IMPL* r = (LagrangeHalfCPolynomial_IMPL*) result;
     fp1024_nayuki.execute_reverse_int(r->coefsC, p->coefs);
 }
-EXPORT void TorusPolynomial_ifft(LagrangeHalfCPolynomial* result, const TorusPolynomial* p) {
+void TorusPolynomial_ifft(LagrangeHalfCPolynomial* result, const TorusPolynomial* p) {
     LagrangeHalfCPolynomial_IMPL* r = (LagrangeHalfCPolynomial_IMPL*) result;
     fp1024_nayuki.execute_reverse_torus32(r->coefsC, p->coefsT);
 }
-EXPORT void TorusPolynomial_fft(TorusPolynomial* result, const LagrangeHalfCPolynomial* p) {
+void TorusPolynomial_fft(TorusPolynomial* result, const LagrangeHalfCPolynomial* p) {
     LagrangeHalfCPolynomial_IMPL* r = (LagrangeHalfCPolynomial_IMPL*) p;
     fp1024_nayuki.execute_direct_torus32(result->coefsT, r->coefsC);
 }
